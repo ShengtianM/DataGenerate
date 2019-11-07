@@ -24,10 +24,10 @@ public class MainTest {
 	public static void mysqlMain(){
 		GenDatabaseData gdbd = new GenDatabaseData();
 		gdbd.setDbMetaDataInf(new MySqlMetaData());
-		String dbName = "dmcode";
+		String dbName = "etl";
 		
 		//待生成数据的表名列表
-		String fileName="G:\\pbc\\mysql\\dmcode\\hbjyx.txt";
+		String fileName="G:\\pbc\\mysql\\etl\\etl.txt";
 		
 		boolean buildSQL=true;//是否生成建表语句
 		try{
@@ -37,18 +37,18 @@ public class MainTest {
 			while((tableName=br.readLine())!=null){	
 				
 				//生成数据
-				String split = tableName.replace("adm_", "").replace("_data", "");
-				String ss = gdbd.genDataByTablePath(GenDatabaseData.MYSQLPREPATH,dbName,split);
+				//String split = tableName.replace("adm_", "").replace("_data", "");
+				String ss = gdbd.genDataByTablePath(GenDatabaseData.MYSQLPREPATH,dbName,tableName);
 				//输出生成文件的路径
 				System.out.println(ss);
 				
 				
 				//生成建表语句
-				String cc = gdbd.buildTableSQL(GenDatabaseData.MYSQLPREPATH, dbName, split);				
+				String cc = gdbd.buildTableSQL(GenDatabaseData.MYSQLPREPATH, dbName, tableName);				
 				sql.append(cc).append(";\n");
 				
 				//关联列合并
-				gdbd.mergeColumnByMap(GenDatabaseData.MYSQLPREPATH, dbName, tableName, "desc_map_col");
+				//gdbd.mergeColumnByMap(GenDatabaseData.MYSQLPREPATH, dbName, tableName, "desc_map_col");
 			}
 			
 			// 建表语句统一输出到文件
