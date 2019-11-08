@@ -24,10 +24,10 @@ public class MainTest {
 	public static void mysqlMain(){
 		GenDatabaseData gdbd = new GenDatabaseData();
 		gdbd.setDbMetaDataInf(new MySqlMetaData());
-		String dbName = "dmcode";
+		String dbName = "ods";
 		
 		//待生成数据的表名列表
-		String fileName="G:\\pbc\\mysql\\dmcode\\dmcode.txt";
+		String fileName="G:\\pbc\\mysql\\ods\\hbjy.txt";
 		
 		boolean buildSQL=true;//是否生成建表语句
 		try{
@@ -48,7 +48,7 @@ public class MainTest {
 				sql.append(cc).append(";\n");
 				
 				//关联列合并
-				gdbd.mergeColumnByMap(GenDatabaseData.MYSQLPREPATH, dbName, tableName, "desc_map_col.txt");
+				//gdbd.mergeColumnByMap(GenDatabaseData.MYSQLPREPATH, dbName, tableName, "desc_map_col.txt");
 			}
 			
 			// 建表语句统一输出到文件
