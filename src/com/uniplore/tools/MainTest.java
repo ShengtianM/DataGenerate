@@ -6,6 +6,9 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.util.List;
 
+import com.uniplore.metadata.HiveMetaData;
+import com.uniplore.metadata.MySqlMetaData;
+
 public class MainTest {
 
 	public MainTest() {

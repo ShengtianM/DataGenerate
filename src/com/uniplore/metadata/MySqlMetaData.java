@@ -1,4 +1,4 @@
-package com.uniplore.tools;
+package com.uniplore.metadata;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.uniplore.table.ColumnDescInfo;
+import com.uniplore.tools.DataSourceManager;
 
 public class MySqlMetaData extends AbstractMetaData implements DbMetaDataInf {
 	

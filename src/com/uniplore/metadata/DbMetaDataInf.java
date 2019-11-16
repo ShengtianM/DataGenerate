@@ -1,4 +1,4 @@
-package com.uniplore.tools;
+package com.uniplore.metadata;
 
 import java.util.List;
 import java.util.Map;

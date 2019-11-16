@@ -1,4 +1,4 @@
-package com.uniplore.tools;
+package com.uniplore.metadata;
 
 import java.io.BufferedReader;
 import java.io.File;

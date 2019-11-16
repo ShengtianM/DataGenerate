@@ -3,6 +3,8 @@ package com.uniplore.tools;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import com.uniplore.metadata.DbMetaDataInf;
+
 /**
  * 数据生成类
  * @author tian
