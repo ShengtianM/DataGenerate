@@ -27,10 +27,10 @@ public class MainTest {
 	public static void mysqlMain(){
 		GenDatabaseData gdbd = new GenDatabaseData();
 		gdbd.setDbMetaDataInf(new MySqlMetaData());
-		String dbName = "dmcode";
+		String dbName = "ods";
 		
 		//待生成数据的表名列表
-		String fileName="G:\\pbc\\mysql\\dmcode\\t_area.txt";
+		String fileName="G:\\pbc\\mysql\\ods\\hbjy.txt";
 		
 		boolean buildSQL=true;//是否生成建表语句
 		boolean isMergeColumn = false;//是否拼接
@@ -66,7 +66,7 @@ public class MainTest {
 				fileWritter.close();
 			}
 			br.close();
-			
+			System.out.println("生成完毕！");
 		}catch(Exception e){
 					
 		}

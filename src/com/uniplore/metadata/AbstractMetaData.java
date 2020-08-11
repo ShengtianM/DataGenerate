@@ -84,7 +84,8 @@ public abstract class AbstractMetaData {
 					//根据随机数得到相应的列值
 					for(ColumnDescInfo desc:colDescList){						
 						if(desc.getFlag(randv)){
-							sb.append(desc.getColValue());							
+							//避免值中出现逗号与分隔符冲突
+							sb.append(desc.getColValue().replace(",", "+"));							
 							break;
 						}
 					}
