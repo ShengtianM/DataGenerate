@@ -24,18 +24,19 @@ do
        rm -rf ${DIRPRE}/${database}/${table}/*
        mysql --defaults-file=${CNFPATH} -e "select column_name from information_schema.columns where table_name = '${table}' and table_schema = '${database}';" > ${DIRPRE}/${database}/${table}/columns.txt
        mysql --defaults-file=${CNFPATH} -e "use ${database} ; show columns in ${table} ;" > ${DIRPRE}/${database}/${table}/desc_${table}
-       #sql="select "
+       sql="select "
        for column in `cat ${DIRPRE}/${database}/${table}/columns.txt`
 	   do
          { 
          if [ "${column}" != "column_name" ]; then          
             mysql --defaults-file=${CNFPATH} -e  "use ${database} ; select ${column},count(${column}) as cc from ${table} group by ${column} order by cc desc limit 100; ">${DIRPRE}/${database}/${table}/desc_col_${column}
-            mysql --defaults-file=${CNFPATH} -e "use ${database} ; select count(distinct ${column}) from ${table}; ">${DIRPRE}/${database}/${table}/dsc_col_${column}
+            sql=${sql}"count(distinct ${column})," 
           fi
          }
 #&
         done
-       #sql=$sql" count(*) from "${table}" ;"
+       sql=${sql}" count(*) from "${table}" ;"
+	   mysql --defaults-file=${CNFPATH} -e "use ${database} ; ${sql} ">${DIRPRE}/${database}/${table}/desc_table_${table}
       #wait 
      fi
     done

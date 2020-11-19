@@ -84,7 +84,7 @@ public class MySqlMetaData extends AbstractMetaData implements DbMetaDataInf {
 			
 			br.close();
 			
-			genRowByFile(datFilePath,targetPath, colMaxMap, columnList, colMap);
+			genRowByFile(datFilePath,targetPath, colMaxMap, columnList, colMap,tableName);
 
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
@@ -99,12 +99,11 @@ public class MySqlMetaData extends AbstractMetaData implements DbMetaDataInf {
 		return super.getDataBaseList(path);
 	}
 	
-	public String genRowByFile(String datPath,String path,Map<String,Long> colMaxMap,List<String> columnList,Map<String,List<ColumnDescInfo>> colMap){
+	public String genRowByFile(String datPath,String path,Map<String,Long> colMaxMap,List<String> columnList,Map<String,List<ColumnDescInfo>> colMap,String tableName){
 		long rowCount = 0;
 		if(columnList.size()>0){
-			String endColName = columnList.get(columnList.size()-1);
 			try{
-				BufferedReader colbr = new BufferedReader(new FileReader(path+"\\desccol_"+endColName));
+				BufferedReader colbr = new BufferedReader(new FileReader(path+"\\desc_table_"+tableName));
 				colbr.readLine();
 				String s = colbr.readLine();
 				if(s!=null){
@@ -191,7 +190,8 @@ public class MySqlMetaData extends AbstractMetaData implements DbMetaDataInf {
 	public String buildTableSQL(String path, String dbName, String tableName){
 		String targetPath = buildPath(path,dbName,tableName);
 		String datFilePath = targetPath+"\\desc_"+tableName;
-		StringBuffer sql=new StringBuffer("DROP TABLE IF EXISTS "+tableName+";\nCREATE TABLE "+tableName+"(");
+		StringBuffer sql=new StringBuffer("DROP TABLE IF EXISTS "+tableName+";\n"
+				+ "CREATE TABLE "+tableName+"( `id` int(32) NOT NULL AUTO_INCREMENT PRIMARY KEY,");
 		int i=0;// 用于判定当前是否为第一列
 		try{
 			BufferedReader br=new BufferedReader(new FileReader(datFilePath));
@@ -218,11 +218,13 @@ public class MySqlMetaData extends AbstractMetaData implements DbMetaDataInf {
 				}else if(colcType.contains("double")||colcType.contains("bigint")){
 					colcType="float";
 				}
-				sql.append("\""+colcName+"\" "+colcType+",");
+				//sql.append("\""+colcName+"\" "+colcType+",");
+				sql.append("`"+colcName+"` "+colcType+",");
 			}
 			br.close();
 			sql.deleteCharAt(sql.length()-1);
-			sql.append(") distributed BY (\""+firstColName+"\")");
+			sql.append(") ");
+					//+ "distributed BY (\""+firstColName+"\")");
 		}catch(Exception e){
 			
 		}

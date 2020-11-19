@@ -59,7 +59,7 @@ public interface DbMetaDataInf {
 	 * @param colMap 列及列值映射
 	 * @return
 	 */
-	public String genRowByFile(String datPath,String path,Map<String,Long> colMaxMap,List<String> columnList,Map<String,List<ColumnDescInfo>> colMap);
+	public String genRowByFile(String datPath,String path,Map<String,Long> colMaxMap,List<String> columnList,Map<String,List<ColumnDescInfo>> colMap,String tableName);
 	
 	/**
 	 * 将生成的数据文件加载进数据库

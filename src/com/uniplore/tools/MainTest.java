@@ -27,14 +27,14 @@ public class MainTest {
 	public static void mysqlMain(){
 		GenDatabaseData gdbd = new GenDatabaseData();
 		gdbd.setDbMetaDataInf(new MySqlMetaData());
-		String dbName = "ods";
+		String dbName = "elec";
 		
 		//待生成数据的表名列表
-		String fileName="G:\\pbc\\mysql\\ods\\hbjy.txt";
+		String fileName="f:\\elec\\tables.txt";
 		
 		boolean buildSQL=true;//是否生成建表语句
 		boolean isMergeColumn = false;//是否拼接
-		boolean isDataGen = true;//是否生成数据
+		boolean isDataGen = false;//是否生成数据
 		try{
 			BufferedReader br=new BufferedReader(new FileReader(fileName));
 			String tableName;

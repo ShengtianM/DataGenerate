@@ -30,6 +30,6 @@ do
           fi
     done
     sql=$sql" count(*) from "${table}" ;"
-    hive -e "use ${database} ; $sql exit ; ">pbc/hive/${database}/${table}/desccol_${table}
+    hive -e "use ${database} ; $sql exit ; ">pbc/hive/${database}/${table}/desc_table_${table}
   done
 done

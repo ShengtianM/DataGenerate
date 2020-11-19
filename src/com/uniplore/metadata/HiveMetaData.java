@@ -83,7 +83,7 @@ public class HiveMetaData extends AbstractMetaData implements DbMetaDataInf {
 			
 			br.close();
 			
-			genRowByFile(datFilePath, datFilePath, colMaxMap, columnList, colMap);
+			genRowByFile(datFilePath, datFilePath, colMaxMap, columnList, colMap,tableName);
 					
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
@@ -95,7 +95,7 @@ public class HiveMetaData extends AbstractMetaData implements DbMetaDataInf {
 
 	@Override
 	public String genRowByFile(String datPath, String path, Map<String, Long> colMaxMap, List<String> columnList,
-			Map<String, List<ColumnDescInfo>> colMap) {
+			Map<String, List<ColumnDescInfo>> colMap,String tableName) {
 		long rowCount=-1;
 		for(String ky:colMaxMap.keySet()){
 			long tmp = colMaxMap.get(ky);
