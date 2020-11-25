@@ -37,7 +37,7 @@ public class MySqlMetaData extends AbstractMetaData implements DbMetaDataInf {
 		String targetPath = buildPath(path,dbName,tableName);
 		String datFilePath = path+"_"+dbName+"_"+tableName+"_data.txt";
 		
-		File dicFile = new File(targetPath+"\\columns.txt");
+		File dicFile = new File(targetPath+File.separator+"columns.txt");
 		
         List<String> columnList = new ArrayList<String>();
         Map<String,List<ColumnDescInfo>> colMap = new HashMap<String,List<ColumnDescInfo>>();
@@ -50,7 +50,8 @@ public class MySqlMetaData extends AbstractMetaData implements DbMetaDataInf {
 				if(!colName.equals("column_name")){
 					columnList.add(colName);
 						
-					BufferedReader colbr = new BufferedReader(new FileReader(targetPath+"\\desc_col_"+colName));
+					BufferedReader colbr = new BufferedReader(new FileReader(
+							targetPath+File.separator+"desc_col_"+colName));
 					String colInfo;
 					long i=0;
 					List<ColumnDescInfo> colDescInfos = new ArrayList<ColumnDescInfo>();
@@ -103,7 +104,8 @@ public class MySqlMetaData extends AbstractMetaData implements DbMetaDataInf {
 		long rowCount = 0;
 		if(columnList.size()>0){
 			try{
-				BufferedReader colbr = new BufferedReader(new FileReader(path+"\\desc_table_"+tableName));
+				BufferedReader colbr = new BufferedReader(new FileReader(
+						path+File.separator+"desc_table_"+tableName));
 				colbr.readLine();
 				String s = colbr.readLine();
 				if(s!=null){
@@ -125,7 +127,7 @@ public class MySqlMetaData extends AbstractMetaData implements DbMetaDataInf {
 		Statement stmt = null;
 		boolean result = false;
 		try{
-			String realPath = this.buildPath(path, dbName, tableName)+"\\dat.txt";
+			String realPath = this.buildPath(path, dbName, tableName)+File.separator+"dat.txt";
 			realPath = realPath.replace("\\", "/");
 			String loadSql = "LOAD DATA LOCAL INFILE '"+realPath+"' IGNORE INTO TABLE "+tableName+" fields terminated by ',' lines terminated by '\\n'";
 			System.out.println("loadsql=:"+loadSql);
@@ -180,7 +182,7 @@ public class MySqlMetaData extends AbstractMetaData implements DbMetaDataInf {
 	@Override
 	public void deleteTableDataFileByPath(String path, String dbName, String tableName) {
 		String targetPath = buildPath(path,dbName,tableName);
-		String datFilePath = targetPath+"\\dat.txt";
+		String datFilePath = targetPath+File.separator+"dat.txt";
 		File targetFile = new File(datFilePath);
 		targetFile.deleteOnExit();
 		
@@ -189,7 +191,7 @@ public class MySqlMetaData extends AbstractMetaData implements DbMetaDataInf {
 	
 	public String buildTableSQL(String path, String dbName, String tableName){
 		String targetPath = buildPath(path,dbName,tableName);
-		String datFilePath = targetPath+"\\desc_"+tableName;
+		String datFilePath = targetPath+File.separator+"desc_"+tableName;
 		StringBuffer sql=new StringBuffer("DROP TABLE IF EXISTS "+tableName+";\n"
 				+ "CREATE TABLE "+tableName+"( `id` int(32) NOT NULL AUTO_INCREMENT PRIMARY KEY,");
 		int i=0;// 用于判定当前是否为第一列
@@ -233,8 +235,8 @@ public class MySqlMetaData extends AbstractMetaData implements DbMetaDataInf {
 	
 	public void mergeColValue(String path, String dbName, String tableName,String targetCol,String srcCol){
 		String targetPath = buildPath(path,dbName,tableName);
-		String targetColPath = targetPath+"\\desc_col_"+targetCol;
-		String srcColPath = targetPath+"\\desc_col_"+srcCol;
+		String targetColPath = targetPath+File.separator+"desc_col_"+targetCol;
+		String srcColPath = targetPath+File.separator+"desc_col_"+srcCol;
 		StringBuffer sql=new StringBuffer();
 		try{
 			BufferedReader targetbr=new BufferedReader(new FileReader(targetColPath));
@@ -269,7 +271,7 @@ public class MySqlMetaData extends AbstractMetaData implements DbMetaDataInf {
 	@Override
 	public void mergeColumnByMap(String path, String dbName, String tableName, String mapName) {
 		String targetPath = buildPath(path,dbName,tableName);
-		String mapPath = targetPath+"\\"+mapName;
+		String mapPath = targetPath+File.separator+mapName;
 		try{
 			BufferedReader targetbr=new BufferedReader(new FileReader(mapPath));
 			targetbr.readLine();

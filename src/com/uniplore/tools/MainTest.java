@@ -30,11 +30,11 @@ public class MainTest {
 		String dbName = "elec";
 		
 		//待生成数据的表名列表
-		String fileName="f:\\elec\\tables.txt";
+		String fileName="/root/uniplore/mysql/elec/tables.txt";
 		
-		boolean buildSQL=true;//是否生成建表语句
+		boolean buildSQL=false;//是否生成建表语句
 		boolean isMergeColumn = false;//是否拼接
-		boolean isDataGen = false;//是否生成数据
+		boolean isDataGen = true;//是否生成数据
 		try{
 			BufferedReader br=new BufferedReader(new FileReader(fileName));
 			String tableName;
@@ -68,7 +68,7 @@ public class MainTest {
 			br.close();
 			System.out.println("生成完毕！");
 		}catch(Exception e){
-					
+			e.printStackTrace();		
 		}
 	}
 	

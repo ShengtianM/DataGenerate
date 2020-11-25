@@ -22,7 +22,7 @@ public abstract class AbstractMetaData {
 	public String buildPath(String path,String dbName){
 		StringBuffer sb = new StringBuffer();
 		sb.append(path);
-		sb.append("\\");
+		sb.append(File.separator);
 		sb.append(dbName);
 		return sb.toString();
 	}
@@ -37,7 +37,7 @@ public abstract class AbstractMetaData {
 	public String buildPath(String path,String dbName,String tableName){
 		StringBuffer sb = new StringBuffer();
 		sb.append(this.buildPath(path,dbName));
-		sb.append("\\");
+		sb.append(File.separator);
 		sb.append(tableName);
 		return sb.toString();
 	}
@@ -117,7 +117,7 @@ public abstract class AbstractMetaData {
 		if(tmpFile.isDirectory()){
 			String[] flist = tmpFile.list();
 			for(String tmps:flist){
-				File tempFile = new File(path+"\\"+tmps);
+				File tempFile = new File(path+File.separator+tmps);
 				if(tempFile.isDirectory()){
 					hiveDbList.add(new File(tmps).getName());
 				}
@@ -133,7 +133,7 @@ public abstract class AbstractMetaData {
 		if(tmpFile.isDirectory()){
 			String[] flist = tmpFile.list();
 			for(String tmps:flist){
-				File tempFile = new File(targetPath+"\\"+tmps);
+				File tempFile = new File(targetPath+File.separator+tmps);
 				if(tempFile.isDirectory()){
 					DbList.add(tempFile.getName());
 				}
