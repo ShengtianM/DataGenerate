@@ -87,7 +87,7 @@ public abstract class AbstractMetaData {
 							//避免值中出现逗号与分隔符冲突
 							String colValue = desc.getColValue().replace(",", "+");
 							if(colValue.contains("AUTO_INCREMENT")){
-								colValue = colValue.replace("AUTO_INCREMENT", String.valueOf(num));
+								colValue = colValue.replace("AUTO_INCREMENT", String.valueOf(i));
 							}
 							sb.append(colValue);							
 							break;

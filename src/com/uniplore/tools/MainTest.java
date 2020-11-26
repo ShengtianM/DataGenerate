@@ -39,8 +39,7 @@ public class MainTest {
 			BufferedReader br=new BufferedReader(new FileReader(fileName));
 			String tableName;
 			StringBuffer sql=new StringBuffer();
-			while((tableName=br.readLine())!=null){	
-				
+			while((tableName=br.readLine())!=null){					
 				//生成数据
 				if(isDataGen){
 					//String split = tableName.replace("adm_", "").replace("_data", "");
