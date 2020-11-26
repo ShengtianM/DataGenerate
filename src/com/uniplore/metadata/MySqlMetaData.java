@@ -80,7 +80,7 @@ public class MySqlMetaData extends AbstractMetaData implements DbMetaDataInf {
 					colbr.close();
 				}
 				
-			}			
+			}		
 			
 			
 			br.close();
@@ -193,7 +193,7 @@ public class MySqlMetaData extends AbstractMetaData implements DbMetaDataInf {
 		String targetPath = buildPath(path,dbName,tableName);
 		String datFilePath = targetPath+File.separator+"desc_"+tableName;
 		StringBuffer sql=new StringBuffer("DROP TABLE IF EXISTS "+tableName+";\n"
-				+ "CREATE TABLE "+tableName+"( `id` int(32) NOT NULL AUTO_INCREMENT PRIMARY KEY,");
+				+ "CREATE TABLE "+tableName+"(");
 		int i=0;// 用于判定当前是否为第一列
 		try{
 			BufferedReader br=new BufferedReader(new FileReader(datFilePath));

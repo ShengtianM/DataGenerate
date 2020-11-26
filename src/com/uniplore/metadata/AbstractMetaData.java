@@ -85,7 +85,11 @@ public abstract class AbstractMetaData {
 					for(ColumnDescInfo desc:colDescList){						
 						if(desc.getFlag(randv)){
 							//避免值中出现逗号与分隔符冲突
-							sb.append(desc.getColValue().replace(",", "+"));							
+							String colValue = desc.getColValue().replace(",", "+");
+							if(colValue.contains("AUTO_INCREMENT")){
+								colValue = colValue.replace("AUTO_INCREMENT", String.valueOf(num));
+							}
+							sb.append(colValue);							
 							break;
 						}
 					}
